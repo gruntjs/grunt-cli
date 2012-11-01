@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+// Nodejs libs.
+var fs = require('fs');
+var path = require('path');
+
+// Badass internal grunt lib.
+var findup = function (dirpath, filename) {
+  var filepath = path.join(dirpath, filename);
+  // Return file if found.
+  if (fs.existsSync(filepath)) { return filepath; }
+  // If parentpath is the same as dirpath, we can't go any higher.
+  var parentpath = path.resolve(dirpath, '..');
+  return parentpath === dirpath ? null : findup(parentpath, filename);
+};
+
+// Search for Gruntfile.
+var gruntfile = findup(process.cwd(), '{G,g}runtfile.{js,coffee}');
+// Gruntfile not found, look for pre-0.4.0 grunt.js file. TODO: remove, someday.
+if (!gruntfile) { gruntfile = findup(process.cwd(), 'grunt.js'); }
+
+// Where might a locally-installed grunt live?
+var dir = path.resolve(gruntfile, '../node_modules/grunt');
+
+// If we can't find a locally installed grunt, use the global one.
+// This can be removed when grunt-init becomes yeoman
+if (!fs.existsSync(dir)) {
+  require('grunt').cli();
+} else {
+  // Run grunt.
+  require(dir).cli();
+}
