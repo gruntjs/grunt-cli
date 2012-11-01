@@ -5,26 +5,16 @@ var fs = require('fs');
 var path = require('path');
 var _ = require('lodash');
 var glob = require('glob');
-
-// Badass internal grunt lib.
-var findup = function (dirpath, patterns) {
-  // Normalize patterns to an array.
-  if (!Array.isArray(patterns)) { patterns = [patterns]; }
-  // Search for files matching patterns.
-  var files = _.chain(patterns).map(function(pattern) {
-    return glob.sync(pattern, {cwd: dirpath, maxDepth: 1});
-  }).flatten().uniq().value();
-  // Return file if found.
-  if (files.length > 0) { return path.join(dirpath, files[0]); }
-  // If parentpath is the same as dirpath, we can't go any higher.
-  var parentpath = path.resolve(dirpath, '..');
-  return parentpath === dirpath ? null : findup(parentpath, patterns);
-};
+var findup = require('findup-sync');
 
 // Search for Gruntfile.
-var gruntfile = findup(process.cwd(), '{G,g}runtfile.{js,coffee}');
-// Gruntfile not found, look for pre-0.4.0 grunt.js file. TODO: remove, someday.
-if (!gruntfile) { gruntfile = findup(process.cwd(), 'grunt.js'); }
+var gruntfile = findup('Gruntfile.{js,coffee}',{nocase: true});
+
+// Gruntfile not found, look for pre-0.4.0 grunt.js file.
+// TODO: remove, someday.
+if (!gruntfile) {
+  gruntfile = findup('grunt.js',{nocase: true});
+}
 
 // Where might a locally-installed grunt live?
 var dir = path.resolve(gruntfile, '../node_modules/grunt');

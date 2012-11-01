@@ -1,7 +1,7 @@
 {
   "name": "grunt-cli",
   "description": "Grunt's command line interface.",
-  "version": "0.4.0",
+  "version": "0.1.0",
   "author": "Grunt Team",
   "homepage": "http://gruntjs.com/",
   "repository": {
@@ -27,6 +27,7 @@
   "dependencies": {
     "grunt": "~0.4.0a",
     "lodash": "~0.9.0",
-    "glob": "~3.1.13"
+    "glob": "~3.1.13",
+    "findup-sync": "~0.1.0"
   }
 }
