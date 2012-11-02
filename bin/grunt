@@ -3,24 +3,28 @@
 // Nodejs libs.
 var fs = require('fs');
 var path = require('path');
+
+// External libs.
 var _ = require('lodash');
 var glob = require('glob');
+
+// Especially badass external lib.
 var findup = require('findup-sync');
 
 // Search for Gruntfile.
-var gruntfile = findup('Gruntfile.{js,coffee}',{nocase: true});
+var gruntfile = findup('Gruntfile.{js,coffee}', {nocase: true});
 
 // Gruntfile not found, look for pre-0.4.0 grunt.js file.
 // TODO: remove, someday.
 if (!gruntfile) {
-  gruntfile = findup('grunt.js',{nocase: true});
+  gruntfile = findup('grunt.js', {nocase: true});
 }
 
 // Where might a locally-installed grunt live?
 var dir = path.resolve(gruntfile, '../node_modules/grunt');
 
-// If we can't find a locally installed grunt, use the global one.
-// This can be removed when grunt-init becomes yeoman
+// If we can't find a locally installed grunt, use the built-in one.
+// This will be removed when grunt-init becomes yeoman.
 if (!fs.existsSync(dir)) {
   require('grunt').cli();
 } else {
