@@ -1,6 +1,6 @@
 {
   "name": "grunt-cli",
-  "description": "Grunt's command line interface.",
+  "description": "The grunt command line interface.",
   "version": "0.1.0",
   "author": "Grunt Team",
   "homepage": "http://gruntjs.com/",

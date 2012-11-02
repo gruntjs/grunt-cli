@@ -3,6 +3,8 @@
 
 Install this globally and you'll have access to the `grunt` command anywhere on your system.
 
-```js
-npm install grunt-cli -g
+```shell
+npm install -g grunt-cli
 ```
+
+See [Getting Started With Grunt](https://github.com/gruntjs/grunt/blob/devel/docs/getting_started.md) for more information.
