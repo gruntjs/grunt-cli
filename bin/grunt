@@ -23,11 +23,18 @@ if (!gruntfile) {
 // Where might a locally-installed grunt live?
 var dir = path.resolve(gruntfile, '../node_modules/grunt');
 
-// If we can't find a locally installed grunt, use the built-in one.
-// This will be removed when grunt-init becomes yeoman.
+// If a local grunt isn't found, we might be grunting grunt itself.
+// Check for grunt's grunt.js file.
 if (!fs.existsSync(dir)) {
-  require('grunt').cli();
-} else {
-  // Run grunt.
+  dir = path.resolve(gruntfile, '../lib/grunt.js');
+}
+
+// Run grunt.
+if (fs.existsSync(dir)) {
   require(dir).cli();
+} else {
+  // If we can't find a locally installed grunt, use the built-in one.
+  // This will be removed and replaced with an error message when
+  // grunt-init becomes yeoman.
+  require('grunt').cli();
 }
