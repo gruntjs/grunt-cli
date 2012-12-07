@@ -20,21 +20,28 @@ if (!gruntfile) {
   gruntfile = findup('grunt.js', {nocase: true});
 }
 
+// No Gruntfile found!
+if (!gruntfile) {
+  // TODO: better error message.
+  console.log('Fatal error: Unable to find Gruntfile. For help, visit http://gruntjs.com/');
+  process.exit(2);
+}
+
 // Where might a locally-installed grunt live?
-var dir = path.resolve(gruntfile, '../node_modules/grunt');
+var gruntpath = path.resolve(gruntfile, '../node_modules/grunt');
 
 // If a local grunt isn't found, we might be grunting grunt itself.
 // Check for grunt's grunt.js file.
-if (!fs.existsSync(dir)) {
-  dir = path.resolve(gruntfile, '../lib/grunt.js');
+if (!fs.existsSync(gruntpath)) {
+  gruntpath = path.resolve(gruntfile, '../lib/grunt.js');
+}
+
+// No locally-installed grunt found!
+if (!fs.existsSync(gruntpath)) {
+  // TODO: better error message.
+  console.log('Fatal error: Unable to find local grunt. For help, visit http://gruntjs.com/');
+  process.exit(99);
 }
 
 // Run grunt.
-if (fs.existsSync(dir)) {
-  require(dir).cli();
-} else {
-  // If we can't find a locally installed grunt, use the built-in one.
-  // This will be removed and replaced with an error message when
-  // grunt-init becomes yeoman.
-  require('grunt').cli();
-}
+require(gruntpath).cli();
