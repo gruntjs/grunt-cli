@@ -23,6 +23,35 @@ function version() {
   console.log('grunt-cli v' + pkg.version);
 }
 
+// Exit with a message and error code.
+function fatal(msg, code) {
+  // Be sure to edit the help.splice(...) index below if necessary!
+  var help = [
+    'grunt-cli: grunt\'s command line interface. (v' + pkg.version + ')',
+    '',
+    'If you\'re seeing this message, either a Gruntfile wasn\'t found or grunt',
+    'hasn\'t been installed locally to your project. For more information about',
+    'installing and configuring grunt, please see the Getting Started guide:',
+    '',
+    'http://gruntjs.com/getting-started',
+  ];
+
+  if (options.version) {
+    // Don't error if --version was specified, just dump the version and exit.
+    version();
+    code = 0;
+  } else {
+    // Don't error if --help was specified, just display the help and exit.
+    if (options.help) {
+      code = 0;
+    } else {
+      help.splice(1, 0, '', 'Fatal error: ' + msg);
+    }
+    help.forEach(function(str) { console.log(str); });
+  }
+  process.exit(code);
+}
+
 // Search for Gruntfile.
 var gruntfile = findup('Gruntfile.{js,coffee}', {nocase: true});
 
@@ -34,9 +63,7 @@ if (!gruntfile) {
 
 // No Gruntfile found!
 if (!gruntfile) {
-  // TODO: better error message.
-  console.log('Fatal error: Unable to find Gruntfile. For help, visit http://gruntjs.com/');
-  process.exit(2);
+  fatal('Unable to find Gruntfile.', 2);
 }
 
 // Where might a locally-installed grunt live?
@@ -50,9 +77,7 @@ if (!fs.existsSync(gruntpath)) {
 
 // No locally-installed grunt found!
 if (!fs.existsSync(gruntpath)) {
-  // TODO: better error message.
-  console.log('Fatal error: Unable to find local grunt. For help, visit http://gruntjs.com/');
-  process.exit(99);
+  fatal('Unable to find local grunt.', 99);
 }
 
 // Run grunt.
