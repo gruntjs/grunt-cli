@@ -5,9 +5,23 @@ var fs = require('fs');
 var path = require('path');
 
 // External libs.
+var nopt = require('nopt');
 
 // Especially badass external lib.
 var findup = require('findup-sync');
+
+// Project metadata.
+var pkg = require('../package.json');
+
+// Parse CLI options we care about.
+var known = {help: Boolean, version: Boolean};
+var aliases = {h: '--help', V: '--version'};
+var options = nopt(known, aliases, process.argv, 2);
+
+// Display grunt-cli version.
+function version() {
+  console.log('grunt-cli v' + pkg.version);
+}
 
 // Search for Gruntfile.
 var gruntfile = findup('Gruntfile.{js,coffee}', {nocase: true});
@@ -42,4 +56,11 @@ if (!fs.existsSync(gruntpath)) {
 }
 
 // Run grunt.
-require(gruntpath).cli();
+var grunt = require(gruntpath);
+
+// Display version number if asked.
+if (options.version) {
+  version();
+}
+
+grunt.cli();

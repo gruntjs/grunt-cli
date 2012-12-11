@@ -25,6 +25,7 @@
   },
   "preferGlobal": true,
   "dependencies": {
+    "nopt": "~1.0.10",
     "findup-sync": "~0.1.0"
   }
 }
