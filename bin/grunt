@@ -27,7 +27,7 @@ function version() {
 function fatal(msg, code) {
   // Be sure to edit the help.splice(...) index below if necessary!
   var help = [
-    'grunt-cli: grunt\'s command line interface. (v' + pkg.version + ')',
+    'grunt-cli: ' + pkg.description + ' (v' + pkg.version + ')',
     '',
     'If you\'re seeing this message, either a Gruntfile wasn\'t found or grunt',
     'hasn\'t been installed locally to your project. For more information about',
