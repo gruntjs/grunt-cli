@@ -14,9 +14,28 @@ var findup = require('findup-sync');
 var pkg = require('../package.json');
 
 // Parse CLI options we care about.
-var known = {help: Boolean, version: Boolean};
+var known = {help: Boolean, version: Boolean, completion: String};
 var aliases = {h: '--help', V: '--version'};
 var options = nopt(known, aliases, process.argv, 2);
+
+// Output shell auto-completion rules.
+var output;
+if ('completion' in options) {
+  try {
+    // Attempt to output shell completion file.
+    output = String(fs.readFileSync(path.join(__dirname, '../completion', options.completion)));
+    console.log(output);
+    process.exit();
+  } catch (err) {
+    output = 'echo "Specified grunt shell auto-completion rules ';
+    if (options.completion && options.completion !== 'true') {
+      output += 'for \'' + options.completion + '\' ';
+    }
+    output += 'not found."';
+    console.log(output);
+    process.exit(5);
+  }
+}
 
 // Display grunt-cli version.
 function version() {
