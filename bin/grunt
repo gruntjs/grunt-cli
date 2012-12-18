@@ -4,74 +4,22 @@
 var fs = require('fs');
 var path = require('path');
 
-// External libs.
-var nopt = require('nopt');
-
 // Especially badass external lib.
 var findup = require('findup-sync');
 
-// Project metadata.
-var pkg = require('../package.json');
+// Internal libs.
+var options = require('../lib/cli').options;
+var completion = require('../lib/completion');
+var info = require('../lib/info');
 
-// Parse CLI options we care about.
-var known = {help: Boolean, version: Boolean, completion: String};
-var aliases = {h: '--help', V: '--version'};
-var options = nopt(known, aliases, process.argv, 2);
-
-// Output shell auto-completion rules.
-var output;
+// Do stuff based on CLI options.
 if ('completion' in options) {
-  try {
-    // Attempt to output shell completion file.
-    output = String(fs.readFileSync(path.join(__dirname, '../completion', options.completion)));
-    console.log(output);
-    process.exit();
-  } catch (err) {
-    output = 'echo "Specified grunt shell auto-completion rules ';
-    if (options.completion && options.completion !== 'true') {
-      output += 'for \'' + options.completion + '\' ';
-    }
-    output += 'not found."';
-    console.log(output);
-    process.exit(5);
-  }
+  completion.print(options.completion);
+} else if (options.version) {
+  info.version();
 }
 
-// Display grunt-cli version.
-function version() {
-  console.log('grunt-cli v' + pkg.version);
-}
-
-// Exit with a message and error code.
-function fatal(msg, code) {
-  // Be sure to edit the help.splice(...) index below if necessary!
-  var help = [
-    'grunt-cli: ' + pkg.description + ' (v' + pkg.version + ')',
-    '',
-    'If you\'re seeing this message, either a Gruntfile wasn\'t found or grunt',
-    'hasn\'t been installed locally to your project. For more information about',
-    'installing and configuring grunt, please see the Getting Started guide:',
-    '',
-    'http://gruntjs.com/getting-started',
-  ];
-
-  if (options.version) {
-    // Don't error if --version was specified, just dump the version and exit.
-    version();
-    code = 0;
-  } else {
-    // Don't error if --help was specified, just display the help and exit.
-    if (options.help) {
-      code = 0;
-    } else {
-      help.splice(1, 0, '', 'Fatal error: ' + msg);
-    }
-    help.forEach(function(str) { console.log(str); });
-  }
-  process.exit(code);
-}
-
-// Search for Gruntfile.
+// Search for 0.4.0+ Gruntfile.
 var gruntfile = findup('Gruntfile.{js,coffee}', {nocase: true});
 
 // Gruntfile not found, look for pre-0.4.0 grunt.js file.
@@ -82,7 +30,9 @@ if (!gruntfile) {
 
 // No Gruntfile found!
 if (!gruntfile) {
-  fatal('Unable to find Gruntfile.', 2);
+  if (options.version) { process.exit(); }
+  if (options.help) { info.help(); }
+  info.fatal('Unable to find Gruntfile.', 2);
 }
 
 // Where might a locally-installed grunt live?
@@ -96,15 +46,10 @@ if (!fs.existsSync(gruntpath)) {
 
 // No locally-installed grunt found!
 if (!fs.existsSync(gruntpath)) {
-  fatal('Unable to find local grunt.', 99);
+  if (options.version) { process.exit(); }
+  if (options.help) { info.help(); }
+  info.fatal('Unable to find local grunt.', 99);
 }
 
-// Run grunt.
-var grunt = require(gruntpath);
-
-// Display version number if asked.
-if (options.version) {
-  version();
-}
-
-grunt.cli();
+// Everything looks good. Require local grunt and run it.
+require(gruntpath).cli();

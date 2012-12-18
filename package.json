@@ -1,7 +1,7 @@
 {
   "name": "grunt-cli",
   "description": "The grunt command line interface.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Grunt Team",
   "homepage": "http://gruntjs.com/",
   "repository": {
@@ -23,9 +23,16 @@
   "engines": {
     "node": ">= 0.8.0"
   },
+  "scripts": {
+    "test": "./bin/grunt test"
+  },
   "preferGlobal": true,
   "dependencies": {
     "nopt": "~1.0.10",
     "findup-sync": "~0.1.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0rc4",
+    "grunt-contrib-jshint": "~0.1.0"
   }
 }
