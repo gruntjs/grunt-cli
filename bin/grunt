@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
+'use strict';
+
 // Nodejs libs.
-var fs = require('fs');
-var path = require('path');
+var spawn = require('child_process').spawn;
 
 // Especially badass external lib.
 var findup = require('findup-sync');
@@ -19,37 +20,26 @@ if ('completion' in options) {
   info.version();
 }
 
-// Search for 0.4.0+ Gruntfile.
-var gruntfile = findup('Gruntfile.{js,coffee}', {nocase: true});
+// Search for installed grunt by using node's built-in require() logic.
+var child = spawn(process.execPath, ['-p', '-e', 'require.resolve("grunt")']);
 
-// Gruntfile not found, look for pre-0.4.0 grunt.js file.
-// TODO: remove, someday.
-if (!gruntfile) {
-  gruntfile = findup('grunt.js', {nocase: true});
-}
+var gruntpath = '';
+child.stdout.on('data', function(data) { gruntpath += data; });
 
-// No Gruntfile found!
-if (!gruntfile) {
-  if (options.version) { process.exit(); }
-  if (options.help) { info.help(); }
-  info.fatal('Unable to find Gruntfile.', 2);
-}
-
-// Where might a locally-installed grunt live?
-var gruntpath = path.resolve(gruntfile, '../node_modules/grunt');
-
-// If a local grunt isn't found, we might be grunting grunt itself.
-// Check for grunt's grunt.js file.
-if (!fs.existsSync(gruntpath)) {
-  gruntpath = path.resolve(gruntfile, '../lib/grunt.js');
-}
-
-// No locally-installed grunt found!
-if (!fs.existsSync(gruntpath)) {
-  if (options.version) { process.exit(); }
-  if (options.help) { info.help(); }
-  info.fatal('Unable to find local grunt.', 99);
-}
-
-// Everything looks good. Require local grunt and run it.
-require(gruntpath).cli();
+child.on('exit', function(code) {
+  // Removing trailing newline from stdout.
+  gruntpath = gruntpath.trim();
+  // If a local grunt isn't found, we might be grunting grunt itself.
+  // Check for grunt's lib/grunt.js file.
+  if (code !== 0) {
+    gruntpath = findup('lib/grunt.js');
+    // No grunt install found!
+    if (!gruntpath) {
+      if (options.version) { process.exit(); }
+      if (options.help) { info.help(); }
+      info.fatal('Unable to find local grunt.', 99);
+    }
+  }
+  // Everything looks good. Require local grunt and run it.
+  require(gruntpath).cli();
+});
