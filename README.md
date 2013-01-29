@@ -17,3 +17,8 @@ To enable bash tab auto-completion for grunt, add the following line to your `~/
 ```bash
 eval "$(grunt --completion=bash)"
 ```
+
+## Installing grunt-cli locally
+If you don't have administrator rights, you may need to install grunt-cli locally to your project using `npm install grunt-cli --save-dev`.  Unfortunately, this will not put the `grunt` executable in your PATH.  You'll need to specify its explicit location when executing it, eg: `./node_modules/.bin/grunt`,
+
+Note: Using grunt-cli in this way is unsupported.
