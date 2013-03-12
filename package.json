@@ -32,7 +32,7 @@
     "findup-sync": "~0.1.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.0rc4",
-    "grunt-contrib-jshint": "~0.1.0"
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.2.0"
   }
 }
