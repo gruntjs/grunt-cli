@@ -21,7 +21,10 @@ if ('completion' in options) {
 var gruntpath;
 
 try {
-  gruntpath = resolve('grunt', {basedir: process.cwd()});
+  gruntpath = resolve('grunt', {
+    paths: process.env.NODE_PATH || [],
+    basedir: process.cwd()
+  });
 } catch (ex) {
   gruntpath = findup('lib/grunt.js');
   // No grunt install found!
