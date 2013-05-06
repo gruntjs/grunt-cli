@@ -24,7 +24,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "./bin/grunt test"
+    "test": "node bin/grunt test"
   },
   "preferGlobal": true,
   "dependencies": {
