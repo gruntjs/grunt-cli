@@ -10,7 +10,8 @@ var resolve = require('resolve').sync;
 var options = require('../lib/cli').options;
 var completion = require('../lib/completion');
 var info = require('../lib/info');
-var bd;
+var path = require( 'path' );
+var bd = process.cwd();
 
 // Do stuff based on CLI options.
 if ('completion' in options) {
@@ -18,12 +19,7 @@ if ('completion' in options) {
 } else if (options.version) {
   info.version();
 } else if( options.gruntfile ){
-  bd = resolve( options.gruntfile );
-  bd = bd.split("/");
-  bd.pop();
-  bd = bd.join("/");
-} else {
-  bd = process.cwd();
+  bd = path.dirname( options.gruntfile );
 }
 
 var gruntpath;
