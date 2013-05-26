@@ -10,18 +10,22 @@ var resolve = require('resolve').sync;
 var options = require('../lib/cli').options;
 var completion = require('../lib/completion');
 var info = require('../lib/info');
+var path = require( 'path' );
+var bd = process.cwd();
 
 // Do stuff based on CLI options.
 if ('completion' in options) {
   completion.print(options.completion);
 } else if (options.version) {
   info.version();
+} else if( options.gruntfile ){
+  bd = path.dirname( options.gruntfile );
 }
 
 var gruntpath;
 
 try {
-  gruntpath = resolve('grunt', {basedir: process.cwd()});
+  gruntpath = resolve('grunt', {basedir: bd});
 } catch (ex) {
   gruntpath = findup('lib/grunt.js');
   // No grunt install found!
