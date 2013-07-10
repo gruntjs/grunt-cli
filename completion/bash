@@ -17,7 +17,7 @@
 # Search the current directory and all parent directories for a gruntfile.
 function _grunt_gruntfile() {
   local curpath="$PWD"
-  while [[ "$curpath" ]]; do
+  while [[ -n "$curpath" ]]; do
     for gruntfile in "$curpath/"{G,g}runtfile.{js,coffee}; do
       if [[ -e "$gruntfile" ]]; then
         echo "$gruntfile"
