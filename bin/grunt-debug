@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var spawn = require('child_process').spawn;
+
+spawn('node', ['--debug', 'grunt'], {
+  cwd: __dirname,
+  stdio: 'inherit'
+});

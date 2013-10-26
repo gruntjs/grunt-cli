@@ -18,7 +18,9 @@
     }
   ],
   "bin": {
-    "grunt": "bin/grunt"
+    "grunt": "bin/grunt",
+    "grunt-debug": "bin/grunt-debug",
+    "grunt-debug-brk": "bin/grunt-debug-brk"
   },
   "engines": {
     "node": ">= 0.8.0"
