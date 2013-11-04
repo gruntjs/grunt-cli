@@ -2,6 +2,8 @@
 
 'use strict';
 
+process.title = 'grunt';
+
 // Especially badass external libs.
 var findup = require('findup-sync');
 var resolve = require('resolve').sync;
