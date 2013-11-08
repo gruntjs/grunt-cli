@@ -39,5 +39,15 @@ try {
   }
 }
 
-// Everything looks good. Require local grunt and run it.
-require(gruntpath).cli();
+if (process.argv.indexOf('--wait-to-execute') === -1) {
+  // Everything looks good. Require local grunt and run it.
+  require(gruntpath).cli();
+} else {
+  // Wait to receive a command to execute grunt
+  process.on('message', function(msg) {
+    if (msg === 'execute') {
+      require(gruntpath).cli();
+    }
+  });
+  setInterval(function() {}, 200);
+}
