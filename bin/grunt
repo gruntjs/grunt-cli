@@ -4,19 +4,11 @@
 
 process.title = 'grunt';
 
-// Especially badass external libs.
-var findup = require('findup-sync');
-var resolve = require('resolve').sync;
-
-// Internal libs.
 var options = require('../lib/cli').options;
 var completion = require('../lib/completion');
 var info = require('../lib/info');
 var path = require('path');
-
-
 var basedir = process.cwd();
-var gruntpath;
 
 // Do stuff based on CLI options.
 if ('completion' in options) {
@@ -27,17 +19,42 @@ if ('completion' in options) {
   basedir = path.resolve(path.dirname(options.gruntfile));
 }
 
-try {
-  gruntpath = resolve('grunt', {basedir: basedir});
-} catch (ex) {
-  gruntpath = findup('lib/grunt.js');
-  // No grunt install found!
-  if (!gruntpath) {
-    if (options.version) { process.exit(); }
-    if (options.help) { info.help(); }
-    info.fatal('Unable to find local grunt.', 99);
+var gruntpath = info.gruntPath(basedir);
+
+// No grunt install found!
+if (!gruntpath) {
+  if (options.version) {
+    process.exit();
   }
-}
+  if (options.help) {
+    info.help();
+  }
+
+  var failMsg = '\n  Unable to find local grunt.\n  Unable to install:\n';
+
+  // Execute npm install if Gruntfile is found.
+  if (info.gruntInstallable()) {
+    console.log('\nRunning npm install...');
+    require('child_process')
+      .spawn('npm', ['install'], {cwd: basedir, stdio: 'inherit'})
+      .on('exit', function (error) {
+        gruntpath = info.gruntPath(basedir);
+        if (!error && gruntpath) {
+          console.log();
+          require(gruntpath).cli();
+        } else {
+          var message = failMsg + '    Installation was attempted but failed';
+          info.fatal(message, 99);
+        }
+      });
+
+    // Unable to attempt npm install.
+  } else {
+    var message = failMsg + '    Gruntfile is missing.';
+    info.fatal(message, 99);
+  }
 
 // Everything looks good. Require local grunt and run it.
-require(gruntpath).cli();
+} else {
+  require(gruntpath).cli();
+}
