@@ -33,6 +33,11 @@ try {
   gruntpath = resolve('grunt', {basedir: basedir});
 } catch (ex) {
   gruntpath = findup('lib/grunt.js');
+  // look for global grunt install
+  if (!gruntpath)
+    try {
+      gruntpath = require.resolve('grunt');
+    } catch (ex) { }
   // No grunt install found!
   if (!gruntpath) {
     if (options.version) { process.exit(); }
