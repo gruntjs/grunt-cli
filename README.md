@@ -12,7 +12,11 @@ npm install -g grunt-cli
 See the [Getting Started](http://gruntjs.com/getting-started) guide for more information.
 
 ## Shell tab auto-completion
-To enable tab auto-completion for Grunt, add one of the following lines to your `~/.bashrc` or `~/.zshrc` file.
+To enable tab auto-completion for Grunt 
+
+### at user level
+
+add one of the following lines to your `~/.bashrc` or `~/.zshrc` file.
 
 ```bash
 # Bash, ~/.bashrc
@@ -22,6 +26,19 @@ eval "$(grunt --completion=bash)"
 ```bash
 # Zsh, ~/.zshrc
 eval "$(grunt --completion=zsh)"
+```
+### at system level
+
+Depending on your system, execute one of the following command to make the auto-completion globally available
+
+```bash
+# Bash
+grunt --completion=bash > sudo tee /etc/bash_completion.d/grunt
+```
+
+```bash
+# Zsh
+grunt --completion=zsh > /usr/local/etc/bash_completion.d/grunt
 ```
 
 ## Installing grunt-cli locally
