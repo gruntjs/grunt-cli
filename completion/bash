@@ -31,8 +31,9 @@ function _grunt_gruntfile() {
 
 # Enable bash autocompletion.
 function _grunt_completions() {
-  # The currently-being-completed word.
-  local cur="${COMP_WORDS[COMP_CWORD]}"
+  # The currently-being-completed word with escaped colons
+  local cur
+  _get_comp_words_by_ref -n : cur
   # The current gruntfile, if it exists.
   local gruntfile="$(_grunt_gruntfile)"
   # The current grunt version, available tasks, options, etc.
@@ -44,6 +45,8 @@ function _grunt_completions() {
   [[ "$cur" == -* ]] && compls="$compls $opts"
   # Tell complete what stuff to show.
   COMPREPLY=($(compgen -W "$compls" -- "$cur"))
+  # clean input with colons
+  __ltrim_colon_completions "$cur"
 }
 
 complete -o default -F _grunt_completions grunt
