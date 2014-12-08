@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'lib/**/*.js',
-        'bin/*',
+        'bin/*'
       ],
       options: {
         curly: true,
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         node: true,
         es5: true
       }
-    },
+    }
   });
 
   // These plugins provide necessary tasks.
