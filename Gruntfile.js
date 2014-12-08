@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         node: true,
         es5: true
       }
-    },
+    }
   });
 
   // These plugins provide necessary tasks.
