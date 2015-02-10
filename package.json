@@ -7,17 +7,17 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/gruntjs/grunt-cli/blob/master/LICENSE-MIT"
+      "url": "https://github.com/gruntjs/grunt-cli/blob/master/LICENSE-MIT"
     }
   ],
-  "bin": {
-    "grunt": "bin/grunt"
-  },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
     "test": "node bin/grunt test"
+  },
+  "bin": {
+    "grunt": "bin/grunt"
   },
   "preferGlobal": true,
   "dependencies": {
@@ -28,5 +28,10 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.0"
-  }
+  },
+  "files": [
+    "bin",
+    "completion",
+    "lib"
+  ]
 }
