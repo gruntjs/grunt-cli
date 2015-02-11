@@ -1,4 +1,5 @@
-# grunt-cli [![Build Status](https://secure.travis-ci.org/gruntjs/grunt-cli.png?branch=master)](http://travis-ci.org/gruntjs/grunt-cli)
+# grunt-cli [![Build Status](https://secure.travis-ci.org/gruntjs/grunt-cli.png?branch=master)](http://travis-ci.org/gruntjs/grunt-cli) [![Inline docs](http://inch-ci.org/github/gruntjs/grunt-cli.svg?branch=master)](http://inch-ci.org/github/gruntjs/grunt-cli)
+
 > The Grunt command line interface.
 
 Install this globally and you'll have access to the `grunt` command anywhere on your system.
