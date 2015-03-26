@@ -30,7 +30,10 @@ if ('completion' in options) {
 }
 
 try {
-  gruntpath = resolve('grunt', {basedir: basedir});
+  gruntpath = resolve('grunt', {
+    basedir: basedir,
+    paths: (process.env.NODE_PATH ? process.env.NODE_PATH.split(':') : [])
+  });
 } catch (ex) {
   gruntpath = findup('lib/grunt.js');
   // No grunt install found!
