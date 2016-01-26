@@ -14,7 +14,6 @@
   "bin": {
     "grunt": "bin/grunt"
   },
-  "preferGlobal": true,
   "dependencies": {
     "findup-sync": "^0.2.1",
     "nopt": "^3.0.1",
