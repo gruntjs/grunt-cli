@@ -15,13 +15,13 @@
     "grunt": "bin/grunt"
   },
   "dependencies": {
-    "findup-sync": "^0.2.1",
-    "nopt": "^3.0.1",
-    "resolve": "^1.1.0"
+    "findup-sync": "~0.3.0",
+    "nopt": "~3.0.6",
+    "resolve": "~1.1.0"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.11.0"
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.12.0"
   },
   "files": [
     "bin",
