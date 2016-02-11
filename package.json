@@ -1,8 +1,8 @@
 {
   "name": "grunt-cli",
   "description": "The grunt command line interface",
-  "version": "0.1.13",
-  "author": "Grunt Team",
+  "version": "1.0.0-rc1",
+  "author": "Grunt Development Team (http://gruntjs.com/development-team)",
   "repository": "gruntjs/grunt-cli",
   "license": "MIT",
   "engines": {
