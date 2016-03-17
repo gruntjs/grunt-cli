@@ -1,4 +1,4 @@
-# grunt-cli [![Build Status: Linux](https://travis-ci.org/gruntjs/grunt-cli.svg?branch=master)](https://travis-ci.org/gruntjs/grunt-cli)
+# grunt-cli [![Build Status: Linux](https://travis-ci.org/gruntjs/grunt-cli.svg?branch=master)](https://travis-ci.org/gruntjs/grunt-cli) [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/prp6g944b05jsq6d/branch/master?svg=true)](https://ci.appveyor.com/project/gruntjs/grunt-cli/branch/master)
 
 > The Grunt command line interface.
 

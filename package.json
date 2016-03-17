@@ -27,5 +27,6 @@
     "bin",
     "completion",
     "lib"
-  ]
+  ],
+  "appveyor_id": "prp6g944b05jsq6d"
 }
