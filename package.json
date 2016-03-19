@@ -20,7 +20,7 @@
     "resolve": "~1.1.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.5",
+    "grunt": "~1.0.0rc1",
     "grunt-contrib-jshint": "~1.0.0"
   },
   "files": [
