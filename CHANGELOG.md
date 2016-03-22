@@ -1,3 +1,7 @@
+- v1.0.1
+  - date: 2016-03-22
+  - changes:
+    - Revert to "nopt": "~1.0.10" due to issues with the update.
 - v1.0.0
   - date: 2016-03-21
   - changes:
