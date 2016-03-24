@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "findup-sync": "~0.3.0",
+    "grunt-known-options": "~1.0.0",
     "nopt": "~3.0.6",
     "resolve": "~1.1.0"
   },
