@@ -14,7 +14,6 @@ var completion = require('../lib/completion');
 var info = require('../lib/info');
 var path = require('path');
 
-
 var basedir = process.cwd();
 var gruntpath;
 
