@@ -1,3 +1,7 @@
+- v1.2.0
+  - date: 2016-04-01
+  - changes:
+    - Use shared grunt-known-options module.
 - v1.1.0
   - date: 2016-03-22
   - changes:
