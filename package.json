@@ -15,7 +15,7 @@
     "grunt": "bin/grunt"
   },
   "dependencies": {
-    "findup-sync": "~0.3.0",
+    "findup-sync": "~0.4.0",
     "grunt-known-options": "~1.1.0",
     "nopt": "~3.0.6",
     "resolve": "~1.1.0"
