@@ -10,6 +10,7 @@ var extensions = require('interpret').jsVariants;
 var nopt = require('nopt');
 var gruntOptions = require('grunt-known-options');
 var completion = require('../lib/completion.js');
+var pkg = require('../package.json');
 
 // Parse `gruntOptions` into a form that nopt can handle.
 var aliases = {};
@@ -25,6 +26,10 @@ Object.keys(gruntOptions).forEach(function(key) {
 
 // Parse them and return an options object.
 var options = nopt(known, aliases, process.argv, 2);
+
+if (options.version) {
+  console.log('grunt-cli v' + pkg.version);
+}
 
 v8flags(function (err, v8flags) {
   var Grunt = new Liftoff({
