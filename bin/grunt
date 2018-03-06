@@ -10,6 +10,7 @@ var extensions = require('interpret').jsVariants;
 var nopt = require('nopt');
 var gruntOptions = require('grunt-known-options');
 var completion = require('../lib/completion.js');
+var info = require('../lib/info.js');
 var pkg = require('../package.json');
 
 // Parse `gruntOptions` into a form that nopt can handle.
@@ -49,8 +50,19 @@ v8flags(function (err, v8flags) {
   }, function (env) {
     var tasks = options.argv.remain;
     delete options.argv;
-    options.gruntfile = env.configPath;
-    var grunt = require(env.modulePath);
-    grunt.tasks(tasks, options);
+    // No grunt install found!
+    if (!env.modulePath) {
+      if (options.version) {
+        process.exit();
+      }
+      if (options.help) {
+        info.help();
+      }
+      info.fatal('Unable to find local grunt.', 99);
+    } else {
+      options.gruntfile = env.configPath;
+      var grunt = require(env.modulePath);
+      grunt.tasks(tasks, options);
+    }
   });
 });
