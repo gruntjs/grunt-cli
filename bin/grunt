@@ -28,7 +28,9 @@ Object.keys(gruntOptions).forEach(function(key) {
 // Parse them and return an options object.
 var options = nopt(known, aliases, process.argv, 2);
 
-if (options.version) {
+if ('completion' in options) {
+  completion.print(options.completion);
+} else if (options.version) {
   console.log('grunt-cli v' + pkg.version);
 }
 
@@ -45,7 +47,6 @@ v8flags(function (err, v8flags) {
     cwd: options.cwd,
     configPath: options.gruntfile,
     require: options.require,
-    completion: completion,
     verbose: options.verbose
   }, function (env) {
     var tasks = options.argv.remain;
