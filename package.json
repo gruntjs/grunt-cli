@@ -15,15 +15,15 @@
     "grunt": "bin/grunt"
   },
   "dependencies": {
-    "grunt-known-options": "^1.1.0",
-    "interpret": "^1.1.0",
-    "liftoff": "^2.5.0",
-    "nopt": "^4.0.1",
-    "v8flags": "^3.0.1"
+    "grunt-known-options": "~1.1.0",
+    "interpret": "~1.1.0",
+    "liftoff": "~2.5.0",
+    "nopt": "~4.0.1",
+    "v8flags": "~3.0.2"
   },
   "devDependencies": {
-    "grunt": "^1.0.2",
-    "grunt-contrib-jshint": "^1.1.0"
+    "grunt": "~1.0.2",
+    "grunt-contrib-jshint": "~1.1.0"
   },
   "files": [
     "bin",
