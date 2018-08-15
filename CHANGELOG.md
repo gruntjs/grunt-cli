@@ -1,3 +1,7 @@
+- v1.3.0:
+  - date: 2018-08-15
+  - changes:
+    - Switch to 'liftoff' module for CLI
 - v1.2.0
   - date: 2016-04-01
   - changes:
