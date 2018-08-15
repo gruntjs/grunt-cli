@@ -6,7 +6,7 @@
   "repository": "gruntjs/grunt-cli",
   "license": "MIT",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
     "test": "node bin/grunt test"
