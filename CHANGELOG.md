@@ -1,3 +1,8 @@
+- v1.3.0:
+  - date: 2018-08-15
+  - changes:
+    - Switch to 'liftoff' module for CLI
+    - Dropped support for node 0.10, 0.12.
 - v1.2.0
   - date: 2016-04-01
   - changes:
