@@ -44,7 +44,7 @@ v8flags(function (err, v8flags) {
     v8flags: v8flags
   });
   Grunt.launch({
-    cwd: options.cwd,
+    cwd: options.base,
     configPath: options.gruntfile,
     require: options.require,
     verbose: options.verbose
