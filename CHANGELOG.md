@@ -1,3 +1,11 @@
+- v1.3.2:
+  - date: 2018-11-04
+  - changes:
+    - bump v8 flags dependency
+- v1.3.1:
+  - date: 2018-08-18
+  - changes:
+    - cwd option fix
 - v1.3.0:
   - date: 2018-08-15
   - changes:
