@@ -4,7 +4,7 @@
 
 process.title = 'grunt';
 
-var Liftoff = require('liftoff');
+var Liftup = require('liftup');
 var v8flags = require('v8flags');
 var extensions = require('interpret').jsVariants;
 var nopt = require('nopt');
@@ -35,7 +35,7 @@ if ('completion' in options) {
 }
 
 v8flags(function (err, v8flags) {
-  var Grunt = new Liftoff({
+  var Grunt = new Liftup({
     name: 'grunt',
     configName: 'Gruntfile',
     // Support a number of languages based on file extension
@@ -43,27 +43,29 @@ v8flags(function (err, v8flags) {
     // Flags that are v8 flags will be loaded into node instead of Gruntfile
     v8flags: v8flags
   });
-  Grunt.launch({
+  Grunt.prepare({
     cwd: options.base,
     configPath: options.gruntfile,
     require: options.require,
     verbose: options.verbose
   }, function (env) {
-    var tasks = options.argv.remain;
-    delete options.argv;
-    // No grunt install found!
-    if (!env.modulePath) {
-      if (options.version) {
-        process.exit();
+    Grunt.execute(env, function(env) {
+      var tasks = options.argv.remain;
+      delete options.argv;
+      // No grunt install found!
+      if (!env.modulePath) {
+        if (options.version) {
+          process.exit();
+        }
+        if (options.help) {
+          info.help();
+        }
+        info.fatal('Unable to find local grunt.', 99);
+      } else {
+        options.gruntfile = env.configPath;
+        var grunt = require(env.modulePath);
+        grunt.tasks(tasks, options);
       }
-      if (options.help) {
-        info.help();
-      }
-      info.fatal('Unable to find local grunt.', 99);
-    } else {
-      options.gruntfile = env.configPath;
-      var grunt = require(env.modulePath);
-      grunt.tasks(tasks, options);
-    }
+    });
   });
 });
