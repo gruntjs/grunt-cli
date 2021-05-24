@@ -47,6 +47,7 @@ v8flags(function (err, v8flags) {
     cwd: options.base,
     configPath: options.gruntfile,
     require: options.require,
+    preload: options.preload,
     verbose: options.verbose
   }, function (env) {
     Grunt.execute(env, function(env) {
