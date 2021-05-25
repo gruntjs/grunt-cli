@@ -1,3 +1,7 @@
+- v1.4.1:
+    - date: 2021-05-24
+    - changes:
+        - fix preload option for latest grunt
 - v1.4.0:
     - date: 2021-03-25
     - changes:
