@@ -1,7 +1,7 @@
 {
   "name": "grunt-cli",
   "description": "The grunt command line interface",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "author": "Grunt Development Team (http://gruntjs.com/development-team)",
   "repository": "gruntjs/grunt-cli",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "grunt": "bin/grunt"
   },
   "dependencies": {
-    "grunt-known-options": "~1.1.1",
+    "grunt-known-options": "~2.0.0",
     "interpret": "~1.1.0",
     "liftup": "~3.0.1",
     "nopt": "~4.0.1",
