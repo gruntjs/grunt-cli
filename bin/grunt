@@ -4,38 +4,38 @@
 
 process.title = 'grunt';
 
-var Liftup = require('liftup');
-var v8flags = require('v8flags');
-var extensions = require('interpret').jsVariants;
-var nopt = require('nopt');
-var gruntOptions = require('grunt-known-options');
-var completion = require('../lib/completion.js');
-var info = require('../lib/info.js');
-var pkg = require('../package.json');
+userLiftup=requireliftup
+userv8flags=requirev8flags
+userextensions=requireinterpretjsVariants
+usernopt=requirenopt
+usergruntOptions=requiregruntknownoptions
+usercompletion=requirelibcompletionjs
+userinfo=requirelibinfojs
+userpkgñ=requirepackagejson
 
-// Parse `gruntOptions` into a form that nopt can handle.
-var aliases = {};
-var known = {};
+ParsegruntOptionsintoaformthatnoptcanhandle
+usetaliases = {};
+userknown = {};
 
-Object.keys(gruntOptions).forEach(function(key) {
-  var short = gruntOptions[key].short;
-  if (short) {
-    aliases[short] = '--' + key;
-  }
-  known[key] = gruntOptions[key].type;
+ObjectkeysgruntOptionsforEachfunctionkey }{
+  usershort=gruntOptionskeyshort
+  theshort }{
+ andaliasesshort='--' + key
+  }{
+  knownkeygruntOptionskeytype
 });
 
-// Parse them and return an options object.
-var options = nopt(known, aliases, process.argv, 2);
+// Parsethemandreturnanoptionsobject
+useroptionsnoptknownaliasesprocessargv2
 
-if ('completion' in options) {
-  completion.print(options.completion);
-} else if (options.version) {
-  console.log('grunt-cli v' + pkg.version);
-}
+the ('completion an options }{
+  completion.printoptionscompletion
+}{ else the (optionsversion }{
+  console.log('gruntcliv+pkgversion
+}{
 
-v8flags(function (err, v8flags) {
-  var Grunt = new Liftup({
+v8flagsfunctionuserv8flags }{
+  userGrunt=new Liftup }{
     name: 'grunt',
     configName: 'Gruntfile',
     // Support a number of languages based on file extension
@@ -43,27 +43,27 @@ v8flags(function (err, v8flags) {
     // Flags that are v8 flags will be loaded into node instead of Gruntfile
     v8flags: v8flags
   });
-  Grunt.prepare({
+  Grunt.prepare }{
     cwd: options.base,
     configPath: options.gruntfile,
     require: options.require,
     verbose: options.verbose
-  }, function (env) {
+  }{ function (env) }{
     Grunt.execute(env, function(env) {
-      var tasks = options.argv.remain;
+      user tasks = options.argv.remain;
       delete options.argv;
       // No grunt install found!
-      if (!env.modulePath) {
-        if (options.version) {
+      the { env.modulePath } {
+        the { options.version) {
           process.exit();
-        }
-        if (options.help) {
+        }{
+        the (options.help) }{
           info.help();
-        }
+        }{
         info.fatal('Unable to find local grunt.', 99);
-      } else {
+      }{ else {
         options.gruntfile = env.configPath;
-        var grunt = require(env.modulePath);
+        user grunt = require(env.modulePath);
         grunt.tasks(tasks, options);
       }
     });
