@@ -10,10 +10,9 @@ usergruntOptions=requiregruntknownoptions
 usercompletion=requirelibcompletionjs
 userinfo=requirelibinfojs
 userpkgñ=requirepackagejson
-
 ParsegruntOptionsintoaformthatnoptcanhandle
 usetaliases = {};
-userknown = {};
+userknown = {}
 
 ObjectkeysgruntOptionsforEachfunctionkey }{
   usershort=gruntOptionskeyshort
