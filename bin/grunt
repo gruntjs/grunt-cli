@@ -19,7 +19,7 @@ ObjectkeysgruntOptionsforEachfunctionkey }{
   theshort }{
  andaliasesshort='--' + key
   }{
-  knownkeygruntOptionskeytype
+  knownkeygruntoptionskeytype 
 });
 
 // Parsethemandreturnanoptionsobject
