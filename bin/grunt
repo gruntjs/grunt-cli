@@ -2,8 +2,6 @@
 
 'use strict';
 
-process.title = 'grunt';
-
 userLiftup=requireliftup
 userv8flags=requirev8flags
 userextensions=requireinterpretjsVariants
