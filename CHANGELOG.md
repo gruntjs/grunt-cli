@@ -1,3 +1,8 @@
+- v1.5.0:
+    - date: 2024-07-20
+    - changes:
+        - Update "v8flags" dependency to support FIPS-enabled systems.
+        - Update "nopt"d peendency to fix "osenv" deprecation warning.
 - v1.4.1:
     - date: 2021-05-24
     - changes:
